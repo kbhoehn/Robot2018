@@ -17,7 +17,7 @@ import com.ctre.phoenix.*;
  */
 public class Drivetrain extends Subsystem {
 
-    
+    // Assign encoders to CAN network
 	TalonSRX LeftMaster = new TalonSRX(1);
 	TalonSRX RightMaster = new TalonSRX(2);
 	TalonSRX LeftSlave = new TalonSRX(4);
@@ -35,7 +35,7 @@ public class Drivetrain extends Subsystem {
 	public Ultrasonic NotFront = new Ultrasonic(trig2,echo2);
 	
 	public Drivetrain(){
-		
+		//Have the slave (backup) encoders follow the master (main) encoders for each side
 		LeftSlave.follow(LeftMaster);
 		RightSlave.follow(RightMaster);
 		LeftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);

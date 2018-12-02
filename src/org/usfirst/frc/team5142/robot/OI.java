@@ -21,25 +21,33 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+
+	// Initialize joysticks
 	Joystick Driver= new Joystick(0);
 	Joystick NotDriver = new Joystick(1);
 public OI() {
-	
+
+	// Bind button (1) so that when its pressed, it triggers the PowerGrabber command.
 	JoystickButton grabberbutton = new JoystickButton(Driver, 1);
 	grabberbutton.toggleWhenPressed(new PowerGrabber());
-	
+
+	// Bind button (2) so that when its held, it triggers PowerElevator
 	JoystickButton elevatorbutton = new JoystickButton(Driver,2);
 	elevatorbutton.whileHeld(new PowerElevator());
 
+	// Bind button (3) so that when its held, it triggers the PowerClimber command
 	JoystickButton climberbutton = new JoystickButton(Driver,3);
 	climberbutton.whileHeld(new PowerClimber());
 
+	// Bind Button (1) so that when its held, it triggers PowerPusher command
 	JoystickButton pusherbutton = new JoystickButton(NotDriver,1);
 	pusherbutton.whileHeld(new PowerPusher());
-	
+
+	// Bind button (3) so that when its held, it triggers PowerElevator command
 	JoystickButton Notelevatorbutton = new JoystickButton(NotDriver,3);
 	Notelevatorbutton.whileHeld(new PowerElevator());
 
+	// Bind button (4) to PowerLiftOff command
 	JoystickButton BlastOff = new JoystickButton(NotDriver,4);
 	BlastOff.toggleWhenPressed(new PowerLiftOff());
 
@@ -54,6 +62,8 @@ public OI() {
 
 }*/
 
+
+	// Gets the value of the joysticks position, stores it in double
 	public double GetLeftJoystick(){
 		return Driver.getRawAxis(1);
 	}

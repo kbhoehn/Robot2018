@@ -48,7 +48,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	//public static final ExampleSubsystem kExampleSubsystem
 	//		= new ExampleSubsystem();
-	
+
+	//Init subsystems
 	public static final Drivetrain drivetrain = new Drivetrain (); 
 	public static final NotGyro gyro = new NotGyro();
 	public static final Grabber grabber = new Grabber();

@@ -27,8 +27,9 @@ public class DriveWithJoysticks extends Command {
    
    //   Robot.drivetrain.ArcadeDrive(Robot.oi.GetLeftJoystickValue(), Robot.oi.GetRightJoystickValue());
   //      Robot.drivetrain.ArcadeDrive(Robot.oi.getJoystick());
-    
-    Robot.drivetrain.Drive(Robot.oi.GetLeftJoystick(), Robot.oi.GetRightJoystick());
+
+        //Drives the robot based on the inputs of the joysticks (refer to OI.Java)
+        Robot.drivetrain.Drive(Robot.oi.GetLeftJoystick(), Robot.oi.GetRightJoystick());
     
     }
 
