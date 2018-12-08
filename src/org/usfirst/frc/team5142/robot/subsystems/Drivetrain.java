@@ -45,48 +45,34 @@ public class Drivetrain extends Subsystem {
 	
 	public double GetRightEncoder(){
 		return LeftMaster.getSelectedSensorPosition(0) * 0.0128;
-		
-		
 	}
 	
 	public double GetLeftEncoder(){
 		return RightMaster.getSelectedSensorPosition(0)*0.0128;
-		
-		
 	}
 	
 	public void ResetEncoder(){
-		
-		LeftMaster.setSelectedSensorPosition(0,0 ,0);
-		RightMaster.setSelectedSensorPosition(0, 0, 0);
-		
+		LeftMaster.setSelectedSensorPosition(0,0,0);
+		RightMaster.setSelectedSensorPosition(0,0,0);
 	}
 	
 	public double Average(){
-		
 		return (this.GetLeftEncoder()+this.GetRightEncoder())/2;
-		
 	//	return (((LeftMaster.getSelectedSensorPosition(0)) + (RightMaster.getSelectedSensorPosition(0))/2)) * 0.0183984375;
 		
 	}
 	
 	
 	public void Drive(double left, double right){
-		
 		LeftMaster.set(ControlMode.PercentOutput, -left);
 		RightMaster.set(ControlMode.PercentOutput, right);
-	
 	}
 	
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
-      
-    	
     	setDefaultCommand(new DriveWithJoysticks());
-    	
-    	
     	// Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
@@ -111,10 +97,7 @@ public class Drivetrain extends Subsystem {
 
      public double ReadUltrasonic2(){
 		return NotFront.getRangeInches();
-    	 
      }
-
-
 }
     
     // public void ArcadeDrive(double leftMotorPower, double rightMotorPower) {

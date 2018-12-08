@@ -44,6 +44,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.properties file in the
  * project.
+ *
+ * This is the primary code for interacting with driver station and outputing to smart dashboard
+ *
+ * FYI:
+ * Not = RIGHT (Why? No reason - that most powerful element of style.)
+ * To upload to Robot, in Eclipse select project then select Run As -> WPIlib deploy,
+ * then start praying.
  */
 public class Robot extends TimedRobot {
 	//public static final ExampleSubsystem kExampleSubsystem
@@ -81,42 +88,35 @@ public class Robot extends TimedRobot {
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
+	 * Sets up features.
 	 */
 	@Override
 	public void robotInit() {
+		//three different autonomous modes to the autochooser. Selected below.
 		autochooser.addDefault("Cross BaseLine", CrossBaseLine);
 		autochooser.addObject("RightSide", RightSwitch);
 		autochooser.addObject("LeftSide", LeftSwitch);
 	//	autochooser.addObject("CenterSwitch", CenterSwitch);
-		
-		
 		SmartDashboard.putData("Auto mode", autochooser);
 		CameraServer.getInstance().startAutomaticCapture(); //camera start
-		
 		Robot.elevator.TurnOffNotLift();
-	
 	}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
+	 * Useful for quickly turnign the robot on and off
 	 */
 	@Override
 	public void disabledInit() {
-
-
 		Robot.elevator.TurnOffNotLift();
-	
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-	
 		this.gameState = new GameState(DriverStation.getInstance().getGameSpecificMessage());
-	
-	
 	}
 
 	/**
@@ -137,10 +137,9 @@ public class Robot extends TimedRobot {
 		Robot.drivetrain.ResetEncoder();
 		Robot.gyro.ResetGyro();
 		
-	
+	//defines what happens with each autonomous option
 	switch (selectedAuto) {
-		
-	case "CrossBaseLine":
+		case "CrossBaseLine":
 			autonomousCommand = new DriveWithEncoders(90,0.6,2,0.02);
 			break;
 		
@@ -155,13 +154,8 @@ public class Robot extends TimedRobot {
 		default:
 			autonomousCommand = new DriveWithEncoders(90,0.6,2,0.02);
 			break;
-		
-		
-		
-		}
-	
+	}
 
-		
 	//	autonomousCommand = new DriveStraightTimed(-0.3,-0.3,2);
 	//	autonomousCommand = new DriveWithEncoders(-120, 0.6, 5, 0.02);
 	//	autonomousCommand = new DriveWithGryo(-90 ,0.5,3,0.030);
@@ -189,19 +183,17 @@ public class Robot extends TimedRobot {
 
 	/**
 	 * This function is called periodically during autonomous.
+	 * Outputs inforation to smart dashboard. Purely for reporting.
+	 * SmartDashboard is just for readouts.
 	 */
 	@Override
-	public void autonomousPeriodic() {
+	public void autonomousPeriodic(){
 		Scheduler.getInstance().run();
-	
-
-		
 		//autoSelected.start();
 		SmartDashboard.putNumber("RightEncoder",drivetrain.GetRightEncoder() );
 		SmartDashboard.putNumber("LeftEncoder",drivetrain.GetLeftEncoder());
 		SmartDashboard.putNumber("Enoder Average", drivetrain.Average());
 		SmartDashboard.putNumber("gyro angle",gyro.GetYaw() );
-	
 	}
 
 	@Override
@@ -210,13 +202,12 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		// This is the code that actually runs the drivetrain
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		
 		Robot.drivetrain.ResetEncoder();
-		
-		Robot.drivetrain.front.setEnabled(true);
+		Robot.drivetrain.front.setEnabled(true); //sets ultrasonic
 		Robot.elevator.TurnOffNotLift();
 	}
 
@@ -241,10 +232,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("LimelightXValue", limelight.GetX());
 		SmartDashboard.putNumber("LimelightYValue", limelight.GetY());
 		SmartDashboard.putNumber("LimelightAreaValue", limelight.GetArea());
-	
-	
-	
-	
 	}
 
 	/**
