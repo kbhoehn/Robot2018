@@ -101,7 +101,7 @@
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="robot2018" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544991333064" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544991334849" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build.xml" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
